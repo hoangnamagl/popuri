@@ -1,0 +1,114 @@
+<section class="Section" id="section-{{ section.id }}">
+    <div class="Container">
+        <div class="wrapper-policy_section">
+            {%- if section.settings.sub_title != blank or section.settings.title != blank -%}
+                <div class="section_heading text-center">
+                    {%- if section.settings.sub_title != blank -%}
+                        <span class="sub_title">
+                            {{ section.settings.sub_title | escape }}
+                        </span>
+                    {%- endif -%}
+                    {%- if section.settings.title != blank -%}
+                        <h2 class="title">
+                            {{ section.settings.title | escape }}
+                        </h2>
+                    {%- endif -%}
+                </div>
+            {%- endif -%}
+            <div class="wrapper-policy_inner">
+                <ul class="items cards-perRow row-3-pc row-2-mb">
+                    {%- for block in section.blocks -%}
+                        <li class="policy-item">
+                            {% if block.settings.icon != blank %}
+                                {{ block.settings.icon }}
+                            {% endif %}
+                            {% if block.settings.text != blank %}
+                                <span class="policy--text">
+                                    {{ block.settings.text }}
+                                </span>
+                            {% endif %}
+                        </li>
+                    {%- endfor -%}
+                </ul>
+            </div>
+        </div>
+    </div>
+</section>
+
+<style>
+    .wrapper-policy_section {
+        margin-bottom: 150px;
+    }
+    .wrapper-policy_inner {
+        margin-top: 35px;
+    }
+    .wrapper-policy_inner .items {
+        gap: 32px 30px;
+    }
+    .wrapper-policy_inner .policy-item {
+        min-height: 82px;
+        display: flex;
+        align-items: center;
+        padding: 10px 35px;
+        border: 1px solid rgba(0, 0, 0, 0.08);
+    }
+    .wrapper-policy_inner .policy-item svg {
+        margin-right: 25px;
+    }
+    .wrapper-policy_inner .policy-item span {
+        display: block;
+        font-size: 14px;
+        letter-spacing: 0.15em;
+        line-height: 19px;
+    }   
+    @media screen and (max-width: 749px) {
+        .wrapper-policy_inner .items {
+            gap: 15px;
+        }
+    } 
+</style>
+  
+{% schema %}
+  {
+    "name": "Policy",
+    "class": "shopify-section-policy",
+    "settings": [
+      {
+        "type": "text",
+        "id": "title",
+        "label": "Title",
+        "default": "カテゴリーから選ぶ"
+      },
+      {
+        "type": "text",
+        "id": "sub_title",
+        "label": "Sub Title",
+        "default": "Categories"
+      }
+    ],
+    "blocks": [
+        {
+            "type": "policy",
+            "name": "Policy",
+            "settings": [
+                {
+                  "type": "textarea",
+                  "id": "icon",
+                  "label": "Icon",
+                  "info": "Use svg Icon"
+                },
+                {
+                     "type": "text",
+                     "id": "text",
+                     "label": "Text"
+                }
+            ]
+        }
+    ],
+    "presets": [
+      {
+        "name": "Policy"
+      }
+    ]
+  }
+{% endschema %}

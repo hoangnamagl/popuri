@@ -1,0 +1,112 @@
+<link rel="stylesheet" href="{{ 'page-about-custom.css' | asset_url }}">
+{% liquid
+    assign firstBlock = section.blocks[0]
+    assign imageBanner = ""
+    assign imageBanner_mb = ""
+    assign title = ""
+    for block in section.blocks
+        if block.settings.page == page.handle
+            assign imageBanner = block.settings.image | image_url
+            assign imageBanner_mb = block.settings.image_mb | image_url
+            assign title = block.settings.title
+            break
+        endif
+    endfor
+%}
+<section class="section-block-about" id="section-{{ section.id }}">
+    <div class="Container">
+        <div class="page-width">
+            <div class="heading_section {% unless firstBlock.settings.page.handle == page.handle %}notFirst{% endunless %}">
+                {%- if firstBlock.settings.page.handle == page.handle -%}
+                    <h1 class="top_title">{{ firstBlock.settings.title | escape }}</h1>
+                {%- else -%}
+                    <span>{{ firstBlock.settings.title | escape }}</span>
+                    <h1 class="top_title hidden-mb">{{ title | escape }}</h1>
+                    <h2 class="top_title hidden-pc">{{ page.title | escape }}</h2>
+                {%- endif -%}
+            </div>
+        </div>
+    </div>
+    {%- if imageBanner != "" -%}
+        <div class="banner">
+            <img class="ProductItem__Image Image--lazyLoad {% if imageBanner_mb != blank %}hidden-mb{% endif %}" 
+                data-src="{{ imageBanner }}" 
+                data-sizes="auto" 
+                loading="lazy" 
+                alt="{{ page.title | escape }}" />
+            {%- if imageBanner_mb != blank -%}
+                <img class="ProductItem__Image Image--lazyLoad hidden-pc" 
+                        data-src="{{ imageBanner_mb }}" 
+                        data-sizes="auto" 
+                        loading="lazy" 
+                        alt="{{ page.title | escape }}" />
+            {%- endif -%}
+        </div>
+    {%- endif -%}
+    <div class="page-content">
+        <div class="Container">
+            <div class="page-width">
+                <div class="rte">
+                    {{ page.content }}
+                </div>
+                <ul class="list-menu">
+                    {%- for block in section.blocks -%}
+                        {%- assign pageItem = pages[block.settings.page] -%}
+                        <li class="block-item {% if pageItem.handle == page.handle %}active{% endif %}">
+                            <a href="{{ pageItem.url }}">
+                                {%- if pageItem.title == "商品名に隠された小さなストーリー" -%}
+                                    小さなストーリー
+                                {%- else -%}
+                                    {{ pageItem.title }}
+                                {%- endif -%}
+                                {%- if forloop.first -%}TOP{%- endif -%}
+                            </a>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="6.114" height="11.68" viewBox="0 0 6.114 11.68">
+                                <g id="Group_18870" data-name="Group 18870" transform="translate(-1424.472 -1127.472)">
+                                  <path id="Path_106" data-name="Path 106" d="M-9289.046-14286.657l4.973-4.971s.293-.253.288-.5a.8.8,0,0,0-.23-.47l-5.03-5.029" transform="translate(10713.871 15425.455)" fill="none" stroke="#444" stroke-linejoin="round" stroke-width="1"/>
+                                </g>
+                            </svg>
+                        </li>
+                    {%- endfor -%}
+                </ul>
+            </div>
+        </div>
+    </div>
+</section>  
+{% schema %}
+    {
+        "name": "About page",
+        "max_blocks": 10,
+        "settings": [   
+            
+        ],
+        "blocks": [   
+            {
+                "type": "block_tem",
+                "name": "Block Item",
+                "settings": [
+                    {
+                      "type": "page",
+                      "id": "page",
+                      "label": "Select page to use"
+                    },
+                    {
+                        "type": "text",
+                        "id": "title",
+                        "label": "Title"
+                    },
+                    {
+                        "type": "image_picker",
+                        "id": "image",
+                        "label": "Banner"
+                    },
+                    {
+                        "type": "image_picker",
+                        "id": "image_mb",
+                        "label": "Banner Mobile"
+                    }
+                ]
+            }
+        ]
+    }
+{% endschema %}

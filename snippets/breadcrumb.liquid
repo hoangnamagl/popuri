@@ -1,0 +1,77 @@
+{%- unless template == 'index' -%}
+    <div class="Container">
+        <nav class="breadcrumb" role="navigation" aria-label="breadcrumbs">
+            <a class="link" href="/">{{ 'general.breadcrumb.home' | t }}</a>  
+            {%- if template contains 'product' -%} 
+                {%- if collection -%}
+                    <span class="separate" aria-hidden="true">{% render 'icon' with 'arrow-breadcrumb' %}</span>
+                    {%- if collection.handle -%}
+                        <span>{{ collection.title | split: '|' | first | link_to: collection.url }}</span>
+                    {%- endif -%}
+                {%- endif -%}
+                <span class="separate" aria-hidden="true">{% render 'icon' with 'arrow-breadcrumb' %}</span>
+                <span>{{ product.title | split: '|' | first }}</span>
+            {%- elsif template contains 'collection' and collection.handle -%}
+                {%- if current_tags -%}
+                    <span class="separate" aria-hidden="true">{% render 'icon' with 'arrow-breadcrumb' %}</span>
+                    <span class="bd-title">
+                        <span>{{ collection.title | split: '|' | first | link_to: collection.url }}</span>
+                        <span class="separate" aria-hidden="true">{% render 'icon' with 'arrow-breadcrumb' %}</span>
+                        {% assign bd_tags = current_tags | join: " + " %}
+                        <span>{{ bd_tags | split: '|' | first }}</span>
+                    </span>
+                {%- else -%}
+                    <span class="separate" aria-hidden="true">
+                        {% render 'icon' with 'arrow-breadcrumb' %}
+                    </span>
+                    <span class="bd-title">
+                        <span>{{ collection.title | split: '|' | first | link_to: collection.url }}</span>
+                    </span>
+                {%- endif -%}
+            {%- elsif template == 'cart' -%}
+                <span class="separate" aria-hidden="true">{% render 'icon' with 'arrow-breadcrumb' %}</span>   
+                <span>
+                    Cart
+                </span>
+            {%- elsif template == 'article' -%}
+                <span class="separate" aria-hidden="true">{% render 'icon' with 'arrow-breadcrumb' %}</span>
+                <span>{{ blog.title | split: '|' | first | link_to: blog.url }}</span>
+                <span class="separate" aria-hidden="true">{% render 'icon' with 'arrow-breadcrumb' %}</span>
+                <span>{{ article.title | split: '|' | first }}</span>
+            {%- elsif template contains 'page' -%}
+                <span class="separate" aria-hidden="true">{% render 'icon' with 'arrow-breadcrumb' %}</span>
+                <span>{{ page.title | split: '|' | first }}</span>
+            {%- elsif template == 'search' -%}
+                <span class="separate" aria-hidden="true">{% render 'icon' with 'arrow-breadcrumb' %}</span>
+                <span>Search</span>
+            {%- else -%}
+                <span class="separate" aria-hidden="true">{% render 'icon' with 'arrow-breadcrumb' %}</span>
+                <span>{{ page_title | split: '|' | first }}</span>
+            {%- endif -%}
+        </nav>
+    </div>
+{%- endunless -%}
+
+<style>
+    #shopify-section-header {
+        -webkit-box-shadow: 0 2px 3px 0 rgba(0, 0, 0, 0.06);
+        -moz-box-shadow: 0 2px 3px 0 rgba(0, 0, 0, 0.06);
+        box-shadow: 0 2px 3px 0 rgba(0, 0, 0, 0.06);
+    }
+    .breadcrumb {
+        padding: 16px 0;
+    }
+    .breadcrumb > a {
+        border-bottom: 1px solid #000;
+    }
+    .breadcrumb .separate {
+        margin: 0 6px 0 7px;
+    }
+    .breadcrumb a,
+    .breadcrumb span {
+        font-size: 12px;
+        line-height: 16px;
+        letter-spacing: 0.05em;
+        font-family: var(--font-hiragino-sans);
+    }
+</style>

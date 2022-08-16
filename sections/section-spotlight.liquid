@@ -1,0 +1,116 @@
+<section class="Section" id="section-{{ section.id }}">
+    <div class="Container-fluid">
+      {%- if section.settings.sub_title != blank or section.settings.title != blank -%}
+        <div class="section_heading text-center">
+            {%- if section.settings.sub_title != blank -%}
+                <span class="sub_title">
+                    {{ section.settings.sub_title | escape }}
+                </span>
+            {%- endif -%}
+            {%- if section.settings.title != blank -%}
+                <h2 class="title">
+                    {{ section.settings.title | escape }}
+                </h2>
+            {%- endif -%}
+        </div>
+      {%- endif -%}
+  
+      <div class="wrapper-spotlight_inner">
+        <div class="spotlights">
+          {%- for block in section.blocks -%}
+            {%- if block.settings.image != blank -%}
+                <div class="card__item">
+                    {%- assign image_url = block.settings.image | img_url: 'master' -%}
+                    {%- assign ratio = block.settings.image.aspect_ratio -%}
+                    <div class="spotlight_item adaptive_height" style="padding-bottom: {{ 100.0 | divided_by: ratio }}%;">
+                        <a href="{{ block.settings.url }}">
+                            <img class="Image--lazyLoad Image--fadeIn" 
+                                data-src="{{ image_url }}" 
+                                data-sizes="auto" 
+                                loading="lazy" 
+                                alt="{{ block.settings.image.alt | escape }}" />
+                        </a>
+                    </div>
+                </div>
+            {%- endif -%}
+          {%- endfor -%}
+        </div>
+      </div>
+    </div>
+</section>
+
+<script>
+    $(document).ready(function(){
+        $('#section-{{ section.id }} .spotlights').slick({
+            slidesToShow: {{ section.settings.grid_desktop_items_per_row | plus: 0 }},
+            slidesToScroll: 1,
+            prevArrow: "<button type='button' class='slick-prev'><svg xmlns='http://www.w3.org/2000/svg' width='12.837' height='25.707' viewBox='0 0 12.837 25.707'><g id='Group_18535' data-name='Group 18535' transform='translate(0.499 0.354)'><path id='Path_106' data-name='Path 106' d='M-9277.062-14272.629l-11.329-11.326s-.665-.576-.654-1.145a1.813,1.813,0,0,1,.523-1.07l11.46-11.459' transform='translate(9289.046 14297.629)' fill='none' stroke='#9fa0a0' stroke-linejoin='round' stroke-width='1'/></g></svg></button>",
+            nextArrow: "<button type='button' class='slick-next'><svg xmlns='http://www.w3.org/2000/svg' width='12.838' height='25.707' viewBox='0 0 12.838 25.707'><g id='Group_18536' data-name='Group 18536' transform='translate(-1424.472 -1127.472)'><path id='Path_106' data-name='Path 106' d='M-9289.046-14272.629l11.33-11.326s.665-.576.654-1.145a1.813,1.813,0,0,0-.523-1.07l-11.461-11.459' transform='translate(10713.871 15425.454)' fill='none' stroke='#9fa0a0' stroke-linejoin='round' stroke-width='1'/></g></svg></button>",
+            responsive: [
+                {
+                  breakpoint: 1024,
+                  settings: {
+                    slidesToShow: 4
+                  }
+                },
+                {
+                  breakpoint: 749,
+                  settings: {
+                    slidesToShow: 2
+                  }
+                }
+            ]
+        });
+    });
+</script>
+  
+{% schema %}
+  {
+    "name": "Spotlight",
+    "class": "shopify-section-spotlight",
+    "settings": [
+      {
+        "type": "text",
+        "id": "sub_title",
+        "label": "Sub-heading"
+      },
+      {
+        "type": "text",
+        "id": "title",
+        "label": "Heading"
+      },
+      {
+        "type": "range",
+        "min": 2,
+        "max": 6,
+        "id": "grid_desktop_items_per_row",
+        "label": "Spotlight per row",
+        "default": 4
+      }
+    ],
+    "blocks": [
+        {
+            "type": "image",
+            "name": "Image",
+            "settings": [
+                {
+                  "type": "image_picker",
+                  "id": "image",
+                  "label": "Image"
+                },
+                {
+                  "type": "url",
+                  "id": "url",
+                  "label": "Url"
+                }
+            ]
+        }
+    ],
+    "presets": [
+      {
+        "category": "Banner",
+        "name": "Spotlight"
+      }
+    ]
+  }
+  {% endschema %}

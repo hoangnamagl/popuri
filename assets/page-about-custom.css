@@ -1,0 +1,201 @@
+.template-page {
+    --font-yumincho: "YuMincho",sans-serif;
+    --font-hiragino-sans: "Hiragino Sans",sans-serif;
+    --font-yu-gothic: "Yu Gothic",sans-serif;
+    --color-breadcrumb: #444;
+    font-family: var(--font-yu-gothic);
+    color: #444;
+}
+
+.c-breadcrumbs {
+    background: transparent;
+}
+.c-breadcrumbs-box a {
+    text-transform: uppercase;
+    text-decoration: underline;
+}
+.c-breadcrumbs-box a,
+.c-breadcrumbs-box span {
+    color: var(--color-breadcrumb);
+    font-size: 12px;
+    line-height: 16px;
+    letter-spacing: 0.05em;
+}
+
+.page-width {
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+
+.heading_section {
+    text-align: center;
+    margin: 55px 0 85px;
+    font-family: var(--font-yumincho);
+}
+.heading_section.notFirst {
+    margin: 65px 0 83px;
+}
+.heading_section span {
+    font-size: 12px;
+    line-height: 16px;
+    margin-bottom: 15px;
+    display: block;
+    letter-spacing: 0.15em;
+}
+.heading_section h1 {
+    font-size: 22px;
+    line-height: 30px;
+    letter-spacing: 0.15em;
+}
+.heading_section h2.top_title {
+    font-size: 18px;
+    line-height: 30px;
+    letter-spacing: .15em;
+    max-width: 245px;
+    margin: 0 auto;
+}
+.section-block-about .banner {
+    margin-bottom: 131px;
+}
+.section-block-about .rte {
+    font-size: 13px;
+    font-weight: 500;
+    line-height: 36px;
+    letter-spacing: 0.05em;
+}
+.section-block-about .rte img {
+    margin-top: 89px;
+    margin-bottom: 131px;
+}
+.list-menu {
+    display: flex;
+    padding-top: 44px;
+    padding-bottom: 43px;
+    margin-top: 125px;
+    margin-bottom: 150px;
+    border-top: 1px solid #E6E6E6;
+    border-bottom: 1px solid #E6E6E6;
+    list-style: none;
+}
+.list-menu li {
+    width: 25%;
+    text-align: center;
+    position: relative;
+    padding: 0 8px 0 0;
+    font-size: 13px;
+    font-weight: 500;
+    line-height: 36px;
+    letter-spacing: 0.05em;
+}
+.list-menu li:before {
+    content: "";
+    height: 23px;
+    width: 1px;
+    position: absolute;
+    right: 0;
+    top: 7px;
+    background: #E6E6E6;
+}
+.list-menu li a {
+    padding: 4px 0;
+    border-bottom: 1px solid transparent;
+}
+.list-menu li svg {
+    position: relative;
+    top: 1px;
+    right: -8px;
+}
+.list-menu li.active {
+    font-weight: bold;
+}
+.list-menu li.active a {
+    border-bottom: 1px solid #444;
+}
+.list-menu li:last-child:before {
+    display: none;
+}
+
+@media screen and (max-width: 767px) {
+    .list-menu {
+        display: block;
+        margin-top: 62px;
+        padding-top: 0;
+        padding-bottom: 79px;
+    }
+    .list-menu li {
+        width: 100%;
+        font-size: 11px;
+        text-align: left;
+        display: flex;
+        justify-content: space-between;
+        padding: 22px 0 23px;
+        line-height: 26px;
+        border-bottom: 1px solid #E6E6E6;
+    }
+    .list-menu li:before {
+        display: none;
+    }
+    .list-menu li a {
+        padding: 0;
+    }
+    .list-menu li svg {
+        top: 8px;
+        right: 9px;
+    }
+}
+
+@media screen and (min-width: 641px) {
+    .hidden-pc {
+        display: none !important;
+    }
+    .chil2 {
+        margin-top: 36px;
+    }
+}
+
+@media screen and (max-width: 640px) {
+    .hidden-mb {
+        display: none !important;
+    }
+    .heading_section {
+        margin: 37px 0 66px;
+    }
+    .section-block-about .banner {
+        margin-bottom: 64px;
+    }
+    .heading_section span {
+        font-size: 11px;
+        line-height: 15px;
+        margin-bottom: 6px;
+    }
+    .heading_section.notFirst {
+        margin: 45px 0 62px;
+    }
+    .heading_section h1 {
+        font-size: 18px;
+        line-height: 24px;
+    }
+    .section-block-about .rte {
+        font-size: 11px;
+        line-height: 26px;
+    }
+    .section-block-about .rte > * {
+        text-align: left !important;
+    }
+    .chil2 br,
+    .content-top br,
+    .content-bottom br:nth-child(n + 2),
+    .section-block-about .rte > div br {
+        display: none;
+    }
+    .section-block-about .rte img {
+        margin-top: 61px;
+        margin-bottom: 64px;
+        height: 200px;
+        object-fit: cover;
+    }
+    .chil2 {
+        margin-top: 26px;
+    }
+}

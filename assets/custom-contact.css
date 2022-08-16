@@ -1,0 +1,14 @@
+.Contact-box .PageContent--narrow {
+    max-width: 750px;
+}
+.Contact-box .PageHeader {
+    margin: 50px 0 87px;
+}
+.Contact-box .PageHeader .u-h1{
+    font-size: 22px;
+}
+.Contact-box .PageContent p{
+    font-size: 13px;
+    line-height: 36px;
+    color: #444444;
+}

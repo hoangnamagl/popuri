@@ -1,0 +1,52 @@
+{
+    "sections": {
+      "main": {
+        "type": "page-about-custom",
+        "blocks": {
+          "4dc76ff2-ea60-49f2-ba5d-89f67b261a51": {
+            "type": "block_tem",
+            "settings": {
+              "page": "ポプリについて",
+              "title": "ポプリについて",
+              "image": "shopify:\/\/shop_images\/Mask_Group_75.jpg"
+            }
+          },
+          "d7f6d300-a1e4-4ff8-a27c-fa5d514503bf": {
+            "type": "block_tem",
+            "settings": {
+              "page": "エプロンからスタート",
+              "title": "エプロンや割烹着からスタートしたポプリ",
+              "image": "shopify:\/\/shop_images\/Mask_Group_77.jpg"
+            }
+          },
+          "586230ba-9e0f-4e9a-9363-ad1edf94a1b2": {
+            "type": "block_tem",
+            "settings": {
+              "page": "美しいシルエットのために",
+              "title": "美しいシルエットのために",
+              "image": "shopify:\/\/shop_images\/Mask_Group_78.jpg"
+            }
+          },
+          "726bc3be-16c0-4468-a5ba-db496b34d6af": {
+            "type": "block_tem",
+            "settings": {
+              "page": "商品名に隠された小さなストーリー",
+              "title": "商品名に隠された小さなストーリー",
+              "image": "shopify:\/\/shop_images\/Mask_Group_79.jpg"
+            }
+          }
+        },
+        "block_order": [
+          "4dc76ff2-ea60-49f2-ba5d-89f67b261a51",
+          "d7f6d300-a1e4-4ff8-a27c-fa5d514503bf",
+          "586230ba-9e0f-4e9a-9363-ad1edf94a1b2",
+          "726bc3be-16c0-4468-a5ba-db496b34d6af"
+        ],
+        "settings": {
+        }
+      }
+    },
+    "order": [
+      "main"
+    ]
+  }

@@ -1,0 +1,178 @@
+{% liquid
+    assign image_url = section.settings.image_1 | image_url
+    capture supported_sizes 
+        render 'image-size', sizes: '200,300,400,600,800,900,1000,1200', image: product.media[1] 
+    endcapture 
+    assign ratio = section.settings.image_1.aspect_ratio
+    assign image_url_2 = section.settings.image_2 | image_url
+    assign ratio_2 = section.settings.image_2.aspect_ratio
+%}
+<section class="Section" id="section-{{ section.id }}">
+  <div class="Container">
+    {%- if section.settings.sub_title != blank or section.settings.title != blank -%}
+        <div class="section_heading text-center">
+            {%- if section.settings.sub_title != blank -%}
+                <span class="sub_title">
+                    {{ section.settings.sub_title | escape }}
+                </span>
+            {%- endif -%}
+            {%- if section.settings.title != blank -%}
+                <h2 class="title">
+                    {{ section.settings.title | escape }}
+                </h2>
+            {%- endif -%}
+        </div>
+    {%- endif -%}
+    <div class="premium__wrapper cards-perRow row-2-pc row-1-mb">
+        <div class="premium__item">
+            <a href="{{ section.settings.url_1 }}">
+                <figure class="adaptive_height" style="padding-bottom: {{ 100.0 | divided_by: ratio }}%;">
+                    <img class="ProductItem__Image Image--lazyLoad Image--fadeIn" 
+                        data-src="{{ image_url }}" 
+                        data-widths="[{{ supported_sizes }}]" 
+                        data-sizes="auto" 
+                        loading="lazy" 
+                        alt="{{ section.settings.image_1.alt | escape }}" />
+                </figure>
+            </a>
+            <div class="premium__content">
+                <h3>{{ section.settings.title_1 }}</h3>
+                <div class="content">
+                    {{ section.settings.sub_1 }}
+                </div>
+            </div>
+        </div>
+        <div class="premium__item">
+            <a href="{{ section.settings.url_2 }}">
+                <figure class="adaptive_height" style="padding-bottom: {{ 100.0 | divided_by: ratio_2 }}%;">
+                    <img class="ProductItem__Image Image--lazyLoad Image--fadeIn" 
+                        data-src="{{ image_url_2 }}" 
+                        data-widths="[{{ supported_sizes }}]" 
+                        data-sizes="auto" 
+                        loading="lazy" 
+                        alt="{{ section.settings.image_2.alt | escape }}" />
+                </figure>
+            </a>
+            <div class="premium__content">
+                <h3>{{ section.settings.title_2 }}</h3>
+                <div class="content">
+                    {{ section.settings.sub_2 }}
+                </div>
+            </div>
+        </div>
+    </div>
+  </div>
+</section>
+<style>
+    .shopify-section-custom-premuim {
+        margin-bottom: 190px;
+    }
+    .premium__item {
+        position: relative;
+        background: #000;
+    }
+    .premium__item img {
+        opacity: 0.9 !important;
+    }
+    .premium__item .premium__content {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        color: #fff;
+        pointer-events: none;
+        padding: 30px 40px;
+        width: 100%;
+    }
+    .premium__item .premium__content h3 {
+        font-family: var(--font-yu-gothic);
+        font-size: 10px;
+        line-height: 16px;
+        letter-spacing: 0.05em;
+        margin-bottom: 10px;
+    }
+    .premium__item .premium__content .content {
+        font-family: var(--font-yumincho);
+        font-size: 18px;
+        line-height: 24px;
+        letter-spacing: 0.15em;
+    }
+</style>
+{% schema %}
+{
+  "name": "Custom Premium",
+  "class": "shopify-section-custom-premuim",
+  "settings": [
+    {
+        "type": "header",
+        "content": "Heading"
+    },
+    {
+        "type": "text",
+        "id": "title",
+        "label": "Title",
+        "default": "特集・コンテンツ"
+    },
+    {
+        "type": "text",
+        "id": "sub_title",
+        "label": "Sub Title",
+        "default": "Pickup Contents"
+    },
+    {
+        "type": "header",
+        "content": "Content 1"
+    },
+    {
+        "type": "image_picker",
+        "id": "image_1",
+        "label": "Image 1"
+    },
+    {
+        "type": "text",
+        "id": "title_1",
+        "label": "Title 1"
+    },
+    {
+        "type": "richtext",
+        "id": "sub_1",
+        "label": "Sub Title 1"
+    },
+    {
+        "type": "url",
+        "id": "url_1",
+        "label": "URL 1"
+    },
+    {
+        "type": "header",
+        "content": "Content 2"
+    },
+    {
+        "type": "image_picker",
+        "id": "image_2",
+        "label": "Image 2"
+    },
+    {
+        "type": "text",
+        "id": "title_2",
+        "label": "Title 2"
+    },
+    {
+        "type": "richtext",
+        "id": "sub_2",
+        "label": "Sub Title 2"
+    },
+    {
+        "type": "url",
+        "id": "url_2",
+        "label": "URL 2"
+    }
+  ],
+  "presets": [
+    {
+      "category": "Advanced",
+      "name": "Custom Premium",
+      "settings": {}
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,111 @@
+<section class="Section" id="section-{{ section.id }}">
+    <div class="Container">
+        <div class="wrapper-blog_section">
+            <div class="wrapper-blog_heading">
+                {%- if section.settings.sub_title != blank or section.settings.title != blank -%}
+                    <div class="section_heading">
+                        {%- if section.settings.sub_title != blank -%}
+                            <span class="sub_title">
+                                {{ section.settings.sub_title | escape }}
+                            </span>
+                        {%- endif -%}
+                        {%- if section.settings.title != blank -%}
+                            <h2 class="title">
+                                {{ section.settings.title | escape }}
+                            </h2>
+                        {%- endif -%}
+                    </div>
+                {%- endif -%}
+            </div>
+            <div class="wrapper-blog_inner">
+                <ul class="articles">
+                    {%- for item in blogs[section.settings.blog.handle].articles -%}
+                        <li class="article-card">
+                            <span class="date">{{ item.published_at | date: "%Y.%m.%d" }}</span>
+                            <a href="{{ item.url }}">{{ item.title }}</a>
+                        </li>
+                    {%- endfor -%}
+                </ul>
+            </div>
+        </div>
+        {% if section.settings.button != blank %}
+          <div class="showMore--btn">
+            <a class="btn" href="{{ blogs[section.settings.blog.handle].url }}">
+              <span>{{ section.settings.button }}</span>
+              {% render 'icon' with 'arrow-button' %}
+            </a>
+          </div>
+        {% endif %}
+    </div>
+</section>
+
+<style>
+  .wrapper-blog_section {
+      display: flex;
+      justify-content: space-between;
+      color: #444;
+  }
+  .wrapper-blog_section .wrapper-blog_heading {
+      width: 325px;
+      display: flex;
+      justify-content: center;
+      border-left: 1px solid #444;
+  }
+  .wrapper-blog_section .wrapper-blog_inner {
+      width: calc(100% - 325px);
+  }
+  .wrapper-blog_section .article-card {
+      font-family: var(--font-yu-gothic);
+      font-weight: 500;
+      line-height: 34px;
+      font-size: 13px;
+      padding: 27px 0 26px;
+      border-top: 1px solid rgba(0, 0, 0, 0.08);
+  }
+  .wrapper-blog_section .article-card span {
+      letter-spacing: 0.12em;
+      margin-right: 40px;
+  }
+  .wrapper-blog_section .article-card a {
+      letter-spacing: 0.05em;
+  }
+  .wrapper-blog_section .article-card:last-child {
+      border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+  }
+</style>
+  
+{% schema %}
+  {
+    "name": "Featured Blog",
+    "class": "shopify-section--bordered shopify-section-blog",
+    "settings": [
+      {
+        "type": "text",
+        "id": "title",
+        "label": "Title",
+        "default": "お知らせ"
+      },
+      {
+        "type": "text",
+        "id": "sub_title",
+        "label": "Sub Title",
+        "default": "News & Informaition"
+      },
+      {
+        "type": "blog",
+        "id": "blog",
+        "label": "Blog"
+      },
+      {
+        "type": "text",
+        "id": "button",
+        "label": "Button text"
+      }
+    ],
+    "presets": [
+      {
+        "name": "Featured Blog"
+      }
+    ]
+  }
+{% endschema %}

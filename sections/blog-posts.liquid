@@ -1,0 +1,92 @@
+<section class="Section" id="section-{{ section.id }}" data-section-type="article-list" data-section-id="{{ section.id }}">
+  <div class="Container">
+    {%- if section.settings.sub_title != blank or section.settings.title != blank -%}
+      <div class="section_heading text-center">
+          {%- if section.settings.sub_title != blank -%}
+              <span class="sub_title">
+                  {{ section.settings.sub_title | escape }}
+              </span>
+          {%- endif -%}
+          {%- if section.settings.title != blank -%}
+              <h2 class="title">
+                  {{ section.settings.title | escape }}
+              </h2>
+          {%- endif -%}
+      </div>
+    {%- endif -%}
+
+    <div class="wrapper-article_inner">
+      <div class="articles">
+        {%- for article in blogs[section.settings.blog.handle].articles limit: 2 -%}
+          <div class="card__item">
+            {%- render 'article-item', article: article, title_blog: blogs[section.settings.blog.handle].title -%}
+          </div>
+        {%- endfor -%}
+      </div>
+      <div class="showMore--btn">
+          <a href="{{ blogs[section.settings.blog.handle].url }}" class="btn">
+              <span>{{ 'blog.article.read_more' | t }}</span>
+              {% render 'icon' with 'arrow-button' %}
+          </a>
+      </div>
+    </div>
+  </div>
+</section>
+<script>
+  $(document).ready(function(){
+    $('#section-{{ section.id }} .articles').slick({
+        slidesToShow: 2,
+        slidesToScroll: 1,
+        arrows: true,
+        centerPadding: '30',
+        prevArrow: "<button type='button' class='slick-prev'><svg xmlns='http://www.w3.org/2000/svg' width='12.837' height='25.707' viewBox='0 0 12.837 25.707'><g id='Group_18535' data-name='Group 18535' transform='translate(0.499 0.354)'><path id='Path_106' data-name='Path 106' d='M-9277.062-14272.629l-11.329-11.326s-.665-.576-.654-1.145a1.813,1.813,0,0,1,.523-1.07l11.46-11.459' transform='translate(9289.046 14297.629)' fill='none' stroke='#9fa0a0' stroke-linejoin='round' stroke-width='1'/></g></svg></button>",
+        nextArrow: "<button type='button' class='slick-next'><svg xmlns='http://www.w3.org/2000/svg' width='12.838' height='25.707' viewBox='0 0 12.838 25.707'><g id='Group_18536' data-name='Group 18536' transform='translate(-1424.472 -1127.472)'><path id='Path_106' data-name='Path 106' d='M-9289.046-14272.629l11.33-11.326s.665-.576.654-1.145a1.813,1.813,0,0,0-.523-1.07l-11.461-11.459' transform='translate(10713.871 15425.454)' fill='none' stroke='#9fa0a0' stroke-linejoin='round' stroke-width='1'/></g></svg></button>",
+        responsive: [
+            {
+              breakpoint: 1024,
+              settings: {
+                slidesToShow: 2
+              }
+            },
+            {
+              breakpoint: 640,
+              settings: {
+                slidesToShow: 1,
+                centerPadding: '0px',
+                arrows: false,
+                dots: true,
+              }
+            }
+        ]
+    });
+  });
+</script>
+{% schema %}
+{
+  "name": "Blog posts",
+  "class": "shopify-section-blog-posts",
+  "settings": [
+    {
+      "type": "text",
+      "id": "sub_title",
+      "label": "Sub-heading"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Heading"
+    },
+    {
+      "type": "blog",
+      "id": "blog",
+      "label": "Blog"
+    }
+  ],
+  "presets": [
+    {
+      "category": "Blog",
+      "name": "Blog posts"
+    }
+  ]
+}
+{% endschema %}

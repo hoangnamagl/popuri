@@ -1,0 +1,113 @@
+<section class="Section" id="section-{{ section.id }}" data-section-id="{{ section.id }}">
+    <div class="Container">
+      {%- if section.settings.sub_title != blank or section.settings.title != blank -%}
+        <div class="section_heading text-center">
+            {%- if section.settings.sub_title != blank -%}
+                <span class="sub_title">
+                    {{ section.settings.sub_title | escape }}
+                </span>
+            {%- endif -%}
+            {%- if section.settings.title != blank -%}
+                <h2 class="title">
+                    {{ section.settings.title | escape }}
+                </h2>
+            {%- endif -%}
+        </div>
+      {%- endif -%}
+  
+      <div class="wrapper-block_inner">
+        <div class="blocks-list cards-perRow row-3-pc row-1-mb Grid--center">
+          {%- for block in section.blocks -%}
+            <div class="block__item">
+                {%- if block.settings.image != blank -%}
+                    {%- capture supported_sizes -%}{%- render 'image-size', sizes: '200,400,600,700,800,900,1000,1200', image: block.settings..image -%}{%- endcapture -%}
+                    {%- assign image_url = block.settings.image | img_url: '1x1' | replace: '_1x1.', '_{width}x.' -%}
+                
+                    <div class="image">
+                        <img class="ArticleItem__Image Image--lazyLoad Image--fadeIn"
+                            data-src="{{ image_url }}"
+                            data-widths="[{{ supported_sizes }}]"
+                            data-sizes="auto"
+                            loading="lazy"
+                            alt="{{ block.settings.image.alt | escape }}" />
+                    </div>
+                {%- endif -%}
+                
+                <div class="blockItem__Content text-center">
+                    {%- if block.settings.title != blank -%}
+                        <h2 class="blockItem__Title">
+                            <a href="{{ block.settings.url }}">{{ block.settings.title }}</a>
+                        </h2>
+                    {%- endif -%}
+                    {%- if block.settings.content != blank -%}
+                        <div class="content">
+                            {{ block.settings.content }}
+                        </div>
+                    {%- endif -%}
+                    <div class="showMore--btn just-center">
+                        <a href="{{ block.settings.url }}" class="btn">
+                            <span>{{ 'blog.article.read_more' | t }}</span>
+                            {% render 'icon' with 'arrow-button' %}
+                        </a>
+                    </div>
+                </div>
+            </div>
+          {%- endfor -%}
+        </div>
+      </div>
+    </div>
+</section>
+
+{% schema %}
+  {
+    "name": "Spotlight 2",
+    "class": "shopify-section-spotlight-2",
+    "settings": [
+      {
+        "type": "text",
+        "id": "sub_title",
+        "label": "Sub-heading"
+      },
+      {
+        "type": "text",
+        "id": "title",
+        "label": "Heading"
+      }
+    ],
+    "blocks": [
+        {
+            "type": "block",
+            "name": "Block",
+            "limit": 3,
+            "settings": [
+                {
+                  "type": "image_picker",
+                  "id": "image",
+                  "label": "Image"
+                },
+                {
+                  "type": "text",
+                  "id": "title",
+                  "label": "Title"
+                },
+                {
+                  "type": "richtext",
+                  "id": "content",
+                  "label": "Content"
+                },
+                {
+                  "type": "url",
+                  "id": "url",
+                  "label": "Url"
+                }
+            ]
+        }
+    ],
+    "presets": [
+      {
+        "category": "Banner",
+        "name": "Spotlight 2"
+      }
+    ]
+  }
+  {% endschema %}

@@ -1,0 +1,219 @@
+html {
+    scroll-behavior: smooth;
+}
+
+.template-page {
+    --font-yumincho: "YuMincho",sans-serif;
+    --font-hiragino-sans: "Hiragino Sans",sans-serif;
+    --font-yu-gothic: "Yu Gothic",sans-serif;
+    --color-breadcrumb: #444;
+    font-family: var(--font-hiragino-sans);
+    color: #444;
+}
+
+.c-breadcrumbs {
+    background: transparent;
+}
+.c-breadcrumbs-box a {
+    text-transform: uppercase;
+    text-decoration: underline;
+}
+.c-breadcrumbs-box a,
+.c-breadcrumbs-box span {
+    color: var(--color-breadcrumb);
+    font-size: 12px;
+    line-height: 16px;
+    letter-spacing: 0.05em;
+}
+
+.page-width {
+    max-width: 1000px;
+    margin: 0 auto;
+}
+.guide-header h1 {
+    font-family: var(--font-yumincho);
+    font-size: 22px;
+    font-weight: bold;
+    line-height: 30px;
+    letter-spacing: 0.15em;
+    margin-top: 55px;
+    margin-bottom: 85px;
+    text-align: center;
+}
+
+.menu-list {
+    width: 100%;
+    display: grid;
+    justify-content: space-between;
+    grid-template: 1fr 1fr / 1fr 1fr 1fr;
+    gap: 10px 35px;
+    margin-bottom: 110px;
+    list-style: none;
+}
+.menu-list li {
+    border-bottom: 1px solid #EBEBEB;
+    text-align: left;
+    position: relative;
+    padding: 9px 0 8px;
+}
+.menu-list li a {
+    display: block;
+    font-size: 13px;
+    line-height: 36px;
+    letter-spacing: 0.05em;
+}
+.menu-list li svg {
+    position: absolute;
+    top: 51%;
+    right: 1px;
+    transform: translatey(-50%);
+}
+.menu-list li:last-child {
+    margin-right: 0;
+}
+.menu-list li.dropdown a svg {
+    opacity: 1;
+    visibility: visible;
+    transition: transform 0.2s ease-in;
+}
+.guide-content .block-item {
+    padding-bottom: 89px;
+}
+.guide-content .block-title {
+    font-size: 16px;
+    letter-spacing: 0.05em;
+    line-height: 36px;
+    font-weight: 500;
+    margin-bottom: 17px;
+}
+.guide-content .block-content {
+    font-size: 13px;
+    line-height: 36px;
+    letter-spacing: 0.05em;
+}
+.block-content .table {
+    margin-top: 38px;
+    margin-bottom: 12px;
+}
+.block-content .trow {
+    max-width: 100%;
+    width: 340px;
+    display: flex;
+    align-items: center;
+}
+.block-content .table-head span {
+    width: 50%;
+    display: block;
+    padding: 0 19px;
+    font-size: 13px;
+    padding-top: 1px;
+    line-height: 37px;
+    letter-spacing: .05em;
+    border: 1px solid #EBEBEB;
+}
+.block-content .table-head span + span {
+    border-left: 0;
+}
+.block-content .thead .trow {
+    text-align: center;
+    background: #F5F5F5;
+}
+.block-content .tbody .trow span {
+    border-top: 0;
+}
+
+.block-content .image-payment {
+    display: flex;
+    justify-content: space-between;
+    max-width: 316px;
+    text-align: center;
+    margin: 25px 0;
+}
+.block-content .image-payment .card {
+    width: calc(50% - 6px);
+}
+.block-content .image-payment img {
+    display: block;
+}
+.block-content .image-payment span {
+    display: block;
+    font-size: 12px;
+    line-height: 27px;
+    letter-spacing: 0;
+    font-family: var(--font-yu-gothic);
+}
+.block-content a {
+    text-decoration: underline;
+}
+
+@media screen and (min-width: 990px) {
+    .flex-column {
+        display: flex;
+        justify-content: space-between;
+    }
+    .flex-column > * {
+        width: calc(50% - 10px);
+    }
+}
+
+
+@media screen and (max-width: 989px) {
+    .menu-list {
+        justify-content: flex-start;
+    }
+    .flex-column > .flex-left {
+        margin-bottom: 20px;
+    }
+}
+
+@media screen and (max-width: 767px) {
+    .menu-list {
+        display: block;
+    }
+    .menu-list li {
+        margin: 0;
+    }
+}
+
+@media screen and (max-width: 640px) {
+    .guide-header h1 {
+        font-size: 18px;
+        line-height: 24px;
+        margin-top: 37px;
+        margin-bottom: 45px;
+    }
+    .menu-list {
+        margin-bottom: 60px;
+    }
+    .menu-list li a {
+        font-size: 11px;
+        line-height: 34px;
+    }
+    .guide-content .block-item {
+        padding-bottom: 64px;
+    }
+    .guide-content .block-title {
+        font-size: 13px;
+        line-height: 36px;
+        margin-bottom: 6px;
+    }
+    .guide-content .block-content {
+        font-size: 11px;
+        line-height: 26px;
+    }
+    .block-content .table {
+        margin-top: 24px;
+        margin-bottom: 8px;
+    }
+    .block-content .table-head span,
+    .block-content .image-payment span {
+        font-size: 11px;;
+    }
+    .block-content .image-payment {
+        margin: 22px auto 15px;
+    }
+    .heading_section h1 {
+        font-size: 18px;
+        line-height: 24px;
+    }
+}

@@ -1,0 +1,88 @@
+<link rel="stylesheet" href="{{ 'page-support-custom.css' | asset_url }}">
+<section class="section-block-support" id="section-{{ section.id }}">
+    <div class="custom-block-support">
+        <div class="Container">
+            <div class="page-width">
+                <div class="guide-header">
+                    <h1>{{ page.title | escape }}</h1>
+                    <ul class="menu-list">
+                        {% for block in section.blocks %}
+                            <li class="menu-lv-1">
+                                <a href="#block-{{ block.id }}" title="{{ link.title }}" class="foot-link">
+                                    {{ block.settings.title_block }}
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="12.707" height="7.061" viewBox="0 0 12.707 7.061">
+                                        <path id="Path_11908" data-name="Path 11908" d="M-2930.678-14716.42l-6,6,6,6" transform="translate(14716.773 -2930.324) rotate(-90)" fill="none" stroke="#444" stroke-width="1"/>
+                                    </svg>
+                                </a>                           
+                            </li>
+                        {% endfor %}
+                    </ul>
+                </div>
+
+                <div class="guide-content">
+                    <div class="item-content">
+                        {% for block in section.blocks %}
+                            {% if block.settings.title_block != blank %}
+                                <div class="block-item" id="block-{{ block.id }}">
+                                    <div {% if block.settings.image != blank %}class="flex-column"{% endif %}>
+                                        {%- if block.settings.image != blank -%}
+                                            <div class="flex-left">
+                                                <img class="ProductItem__Image Image--lazyLoad Image--fadeIn" 
+                                                    data-src="{{ block.settings.image | image_url }}" 
+                                                    data-sizes="auto" 
+                                                    loading="lazy" 
+                                                    alt="{{ block.settings.title_block | escape }}" 
+                                                    data-media-id="{{ block.id }}" />
+                                            </div>
+                                        {%- endif -%}
+                                        
+                                        <div class="flex-right">
+                                            <div class="block-title">
+                                                <h3>{{ block.settings.title_block }}</h3>       
+                                            </div>
+                                            <div class="block-content">
+                                            {{ block.settings.content_block }}
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            {% endif %}
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>  
+{% schema %}
+    {
+        "name": "Custom Block Support",
+        "max_blocks": 10,
+        "settings": [   
+            
+        ],
+        "blocks": [   
+            {
+                "type": "block_tem",
+                "name": "Block Item",
+                "settings": [
+                    {
+                        "type": "text",
+                        "id": "title_block",
+                        "label": "Title Block"
+                    },
+                    {
+                        "type": "image_picker",
+                        "id": "image",
+                        "label": "Image"
+                    },
+                    {
+                        "type": "textarea",
+                        "id": "content_block",
+                        "label": "Content Block"
+                    }
+                ]
+            }
+        ]
+    }
+{% endschema %}
